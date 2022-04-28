@@ -23,20 +23,20 @@ d42d3978fc05   fhsinchy/hello-dock                                   "/docker-en
 
 如我们运行以下指令：
 
-docker container run --publish 8080:80 fhsinchy/hello-dock
+`docker container run --publish 8080:80 fhsinchy/hello-dock`
 
---publish 8080:80 时，这意味着发送到主机系统端口 8080 的任何请求都将转发到容器内的端口 80。现在要在浏览器上访问该应用程序，只需访问 http://127.0.0.1:8080即可。
+`--publish 8080:80` 时，这意味着发送到主机系统端口 8080 的任何请求都将转发到容器内的端口 80。现在要在浏览器上访问该应用程序，只需访问 `http://127.0.0.1:8080`即可。
 
 
 ### 如何使用分离模式
 
-run 命令的另一个非常流行的选项是 ---detach 或 -d 选项。 在上面的示例中，为了使容器继续运行，必须将终端窗口保持打开状态。关闭终端窗口会停止正在运行的容器。这是因为，默认情况下，容器在前台运行，并像从终端调用的任何其他普通程序一样将其自身附加到终端。为了覆盖此行为并保持容器在后台运行，可以在 run 命令中包含 --detach 选项，如下所示：
+run 命令的另一个非常流行的选项是 `---detach 或 -d 选项`。 在上面的示例中，为了使容器继续运行，必须将终端窗口保持打开状态。关闭终端窗口会停止正在运行的容器。这是因为，默认情况下，容器在前台运行，并像从终端调用的任何其他普通程序一样将其自身附加到终端。为了覆盖此行为并保持容器在后台运行，可以在 run 命令中包含 `--detach` 选项，如下所示：
 
 ```
 docker container run --detach --publish 8080:80 fhsinchy/hello-dock
 ```
 
->提供选项的顺序并不重要。 如果将 --publish 选项放在 --detach 选项之前，效果相同。使用 run 命令时必须记住的一件事是镜像名称必须最后出现。如果在镜像名称后放置任何内容，则将其作为参数传递给容器入口点（在在容器内执行命令小节做了解释），可能会导致意外情况。
+>提供选项的顺序并不重要。 如果将 `--publish 选项放在 --detach 选项之前`，效果相同。使用 run 命令时必须记住的一件事是镜像名称必须最后出现。如果在镜像名称后放置任何内容，则将其作为参数传递给容器入口点（在在容器内执行命令小节做了解释），可能会导致意外情况。
 
 ### 列出当前系统运行的容器
 
@@ -63,7 +63,7 @@ docker container ls
 
 基于这两个随机标识符来引用容器非常不方便。如果可以使用自定义的名称来引用容器，那就太好了。
 
-可以使用 --name 选项来命名容器。要使用名为 hello-dock-container 的 fhsinchy/hello-dock 镜像运行另一个容器，可以执行以下命令：
+可以使用 `--name` 选项来命名容器。要使用名为 hello-dock-container 的 fhsinchy/hello-dock 镜像运行另一个容器，可以执行以下命令：
 
 ```
 docker container run --detach --publish 8888:80 --name hello-dock-container fhsinchy/hello-dock
@@ -71,18 +71,18 @@ docker container run --detach --publish 8888:80 --name hello-dock-container fhsi
 # b1db06e400c4c5e81a93a64d30acc1bf821bed63af36cab5cdb95d25e114f5fb
 ```
 
-甚至可以使用 container rename 命令来重命名旧容器。该命令的语法如下:
+甚至可以使用 `container rename` 命令来重命名旧容器。该命令的语法如下:
 
 `docker container rename <container identifier> <new name>`
 
-该命令不会产生任何输出，但是可以使用 container ls 命令来验证是否已进行更改。 rename 命令不仅适用于处于运行状态的容器和还适用于处于停止状态的容器。
+该命令不会产生任何输出，但是可以使用 `container ls` 命令来验证是否已进行更改。 `rename` 命令不仅适用于处于运行状态的容器和还适用于处于停止状态的容器。
 
 
 ### 怎样停止或者杀死运行中的容器
 
 可以通过简单地关闭终端窗口或单击 ctrl + c 来停止在前台运行的容器。但是，不能以相同方式停止在后台运行的容器。
 
-有两个命令可以完成此任务。 第一个是 container stop 命令。该命令的通用语法如下：
+有两个命令可以完成此任务。 第一个是 `container stop` 命令。该命令的通用语法如下：
 
 `docker container stop <container identifier>`
 
@@ -90,7 +90,7 @@ docker container run --detach --publish 8888:80 --name hello-dock-container fhsi
 
 如果使用 name 作为标识符，则 name 将作为输出返回。stop 命令通过发送信号SIGTERM 来正常关闭容器。如果容器在一定时间内没有停止运行，则会发出 SIGKILL 信号，该信号会立即关闭容器。
 
-如果要发送 SIGKILL 信号而不是 SIGTERM 信号，则可以改用 container kill 命令。container kill 命令遵循与 stop 命令相同的语法。
+如果要发送 SIGKILL 信号而不是 SIGTERM 信号，则可以改用 `container kill` 命令。`container kill` 命令遵循与 stop 命令相同的语法。
 
 `docker container kill <container identifier>`
 
@@ -101,19 +101,19 @@ docker container run --detach --publish 8888:80 --name hello-dock-container fhsi
 - 重新启动先前已停止或终止的容器。
 - 重新启动正在运行的容器。
 
-正如上一小节中学到的，停止的容器保留在系统中。如果需要，可以重新启动它们。container start 命令可用于启动任何已停止或终止的容器。该命令的语法如下：
+正如上一小节中学到的，停止的容器保留在系统中。如果需要，可以重新启动它们。`container start` 命令可用于启动任何已停止或终止的容器。该命令的语法如下：
 
 `docker container start <container identifier>`
 
 > 可以通过执行 container ls --all 命令来获取所有容器的列表，然后寻找状态为 Exited 的容器。
 
-现在，可以使用 container ls 命令查看正在运行的容器列表，以确保该容器正在运行。默认情况下，container start 命令以分离模式启动容器，并保留之前进行的端口配置。因此，如果现在访问 http：//127.0.0.1：8080，应该能够像以前一样访问 hello-dock 应用程序。
+现在，可以使用 container ls 命令查看正在运行的容器列表，以确保该容器正在运行。默认情况下，`container start` 命令以分离模式启动容器，并保留之前进行的端口配置。因此，如果现在访问 `http：//127.0.0.1：8080`，应该能够像以前一样访问 hello-dock 应用程序。
 
-现在，在想重新启动正在运行的容器，可以使用 container restart 命令。container restart 命令遵循与 container start 命令完全相同的语法。
+现在，在想重新启动正在运行的容器，可以使用 `container restart` 命令。`container restart` 命令遵循与 `container start` 命令完全相同的语法。
 
-这两个命令之间的主要区别在于，container restart 命令尝试停止目标容器，然后再次启动它，而 start 命令只是启动一个已经停止的容器。
+这两个命令之间的主要区别在于，`container restart` 命令尝试停止目标容器，然后再次启动它，而 start 命令只是启动一个已经停止的容器。
 
-在容器停止的情况下，两个命令完全相同。但是如果容器正在运行，则必须使用container restart 命令。
+在容器停止的情况下，两个命令完全相同。但是如果容器正在运行，则必须使用`container restart` 命令。
 
 
 
